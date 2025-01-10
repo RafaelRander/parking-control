@@ -22,13 +22,13 @@ public class UsuarioEntity implements Serializable {
     private String name;
 
     //username será hash do email cadastrado do usuário.
-    @Column(name = "username", nullable = false, length = 200)
-    private String userName;
+    @Column(name = "username", nullable = false, unique = true, length = 200)
+    private String username;
 
     @Column(name = "password", nullable = false, length = 10)
     private String password;
 
-    @Column(name = "email", nullable = false, length = 250)
+    @Column(name = "email", nullable = false, unique = true, length = 250)
     private String email;
 
     //tp_usuario = 1 == usuario comum    tp_usuario = 2 == usuario admin
@@ -46,8 +46,6 @@ public class UsuarioEntity implements Serializable {
 
     @Column(name = "data_modificacao", nullable = false)
     private LocalDateTime dataModificacao;
-
-
 
     @Override
     public boolean equals(Object o) {

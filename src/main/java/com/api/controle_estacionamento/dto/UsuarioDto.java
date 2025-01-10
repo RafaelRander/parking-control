@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 public class UsuarioDto {
 
     @NotBlank
-    private String userName;
+    private String name;
+
+    @NotBlank
+    private String username;
 
     @Size(min=6, max=6)
     private String password;
@@ -32,6 +35,5 @@ public class UsuarioDto {
     private String dsUsuModificacao;
 
     private LocalDateTime dataModificacao;
-
 
 }

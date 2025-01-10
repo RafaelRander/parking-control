@@ -1,6 +1,7 @@
 package com.api.controle_estacionamento.service;
 
 import com.api.controle_estacionamento.entity.UsuarioEntity;
+import com.api.controle_estacionamento.exception.EntityNotFoundException;
 import com.api.controle_estacionamento.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,11 @@ public class UsuarioService {
 
     @Transactional
      public UsuarioEntity salvar(UsuarioEntity usuarioEntity){
-         return usuarioRepository.save(usuarioEntity);
+            return usuarioRepository.save(usuarioEntity);
      }
 
     public UsuarioEntity buscarPorId(UUID id) {
-        return usuarioRepository.findById(id).orElseThrow(()-> new RuntimeException("Usuário não encontrado."));
+        return usuarioRepository.findById(id).orElseThrow(()-> new EntityNotFoundException(String.format("Usuário id='%s' não encontrado.", id)));
     }
 
     @Transactional
@@ -36,7 +37,7 @@ public class UsuarioService {
         else{
              user.setPassword(novaSenha);
         }
-        return user;
+        return usuarioRepository.save(user);
     }
 
     public List<UsuarioEntity> buscarTodos() {
